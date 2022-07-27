@@ -1,5 +1,4 @@
 // Método Map ---------
-
 const arrayMap = [1, 2, 3, 4, 5]; //esse é o array que você terá que iterar
 
 // função callback
@@ -9,10 +8,14 @@ function callbackMap(element, index, array) {
 }
 
 function map(array, callback) {
-  //sua lógica
+  let newArray = []
+  for (let i = 0; i < array.length; i++) {
+    newArray.push(callback(array[i], i, array))
+  }
+  return newArray
 }
 
-//console.table(map(arrayMap, callbackMap));
+console.log(map(arrayMap, callbackMap));
 
 //Método Filter ---------
 
@@ -21,16 +24,20 @@ const arrayFilter = [1, 2, 3, 4, 5]; //esse é o array que você terá que itera
 // função callback
 // Ela apenas imprime o elemento que for maior que 2
 function callbackFilter(element, index, array) {
-  if (element > 2 && index && array.length > 2) {
-    return true;
-  }
+  return element > 2 && index && array.length > 2
 }
 
 function filter(array, callback) {
-  //sua lógica
+  let arr = [];
+  for (let i = 0; i < array.length; i++) {
+    if (callback(array[i], i, array)) {
+      arr.push(array[i])
+    }
+  }
+  return arr
 }
 
-//console.log(filter(arrayFilter, callbackFilter));
+console.log(filter(arrayFilter, callbackFilter));
 
 //Método Reduce ---------
 
@@ -43,8 +50,11 @@ function callbackReduce(acumulator, valorAtual) {
 }
 
 function reduce(array, callback, initialValue = 0) {
-  //sua lógica
+  let resultado = initialValue
+  for(let i = 0; i < array.length;i++){
+    resultado = callback(resultado , array[i])
+  }
+  return resultado
 }
-
-// console.log(reduce(arrayReduce, callbackReduce));
-// console.log(reduce(arrayReduce, callbackReduce, 50));
+console.log(reduce(arrayReduce, callbackReduce)); 
+console.log(reduce(arrayReduce, callbackReduce, 50)); 
